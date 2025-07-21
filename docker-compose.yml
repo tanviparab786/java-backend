@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  java-app:
+    build: .
+    container_name: javamavenapp
+    ports:
+      - "8000:8080"
+    networks:
+      - javamavennetwork
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: admindb
+    ports:
+      - "5432:5432"
+    networks:
+      - javamavennetwork
+
+networks:
+  javamavennetwork:
+    driver: bridge
